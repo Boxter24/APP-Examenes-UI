@@ -1,0 +1,44 @@
+.contenedor{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;    
+    gap: 2em;    
+}
+
+.card {
+    width: 300px;
+    height: 350px;
+    border-radius: 12px;
+    overflow: hidden;    
+}
+
+.card:hover{
+    box-shadow: 4px 4px 4px 4px #666;
+    transform: scale(105%);
+    transition: 2 all ease-in-out;
+}
+
+img{    
+    max-height: 200px;
+}
+
+.header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: 100% 100%;
+}
+
+.title-card{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.text-card{
+    text-align: justify;
+}
+
+@media only screen and (max-width: 772px) {    
+    .card {
+        max-width: 250px;
+        min-height: 300px;           
+    }
+}

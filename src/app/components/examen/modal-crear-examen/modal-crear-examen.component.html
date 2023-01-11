@@ -1,0 +1,43 @@
+<h1 mat-dialog-title class="title-modal">{{ data.accion }} Exámen</h1>
+<form [formGroup]="form" (ngSubmit)="formSubmit()">
+    <div mat-dialog-content class="form-group">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Titulo</mat-label>
+            <input matInput type="text" required formControlName="titulo">
+            <mat-error *ngIf="titulo?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput required formControlName="descripcion"></textarea>
+            <mat-error *ngIf="descripcion?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Pts Máximos</mat-label>
+            <input matInput type="number" required formControlName="puntosMaximos">
+            <mat-error *ngIf="puntosMaximos?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>N° de Preguntas</mat-label>
+            <input matInput type="number" required formControlName="numeroDePreguntas">
+            <mat-error *ngIf="numeroDePreguntas?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Categoria</mat-label>
+            <mat-select [(value)]="valueCategoria" formControlName="categoria">                
+                <mat-option *ngFor="let categoria of categorias" [value]="categoria.categoriaId">{{ categoria.titulo }}</mat-option>"                
+            </mat-select>
+        </mat-form-field>
+
+        <mat-slide-toggle formControlName="activo" color="primary">Activo</mat-slide-toggle>
+
+    </div>
+    <div mat-dialog-actions class="modal-footer">
+        <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
+        <button mat-raised-button color="primary" type="submit" cdkFocusInitial>{{ data.accion }}</button>
+    </div>
+</form>

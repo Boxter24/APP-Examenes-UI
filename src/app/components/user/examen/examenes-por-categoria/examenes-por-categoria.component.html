@@ -1,0 +1,26 @@
+<div class="contenedor">
+    <mat-card class="card" *ngFor="let examen of examenes">
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <div class="content-card">
+            <mat-card-content>
+                <mat-card-title class="title-card">{{ examen.titulo }}</mat-card-title>
+                <p class="text-card">
+                    {{ examen.descripcion }}
+                </p>
+            </mat-card-content>            
+            <mat-card-actions>                
+                <a mat-raised-button color="primary" [routerLink]="['/user/examen/instrucciones/' + examen.examenId]">Ver</a>
+                <a mat-raised-button color="warn" [routerLink]="['/user/examen/instrucciones/' + examen.examenId]">Empezar</a>
+
+                <span>Preguntas: {{ examen.numeroDePreguntas }}  </span>
+                <span>  Pts: {{ examen.puntosMaximos }}</span>
+            </mat-card-actions>            
+        </div>        
+    </mat-card>
+
+    <div class="sin-registros" *ngIf="examenes.length == 0">
+        <h2>No hay Examenes para esta Categoria</h2>
+        <img src="../../../../../assets/images/sin-registros.svg" alt="Sin Categorias">
+    </div>
+
+</div>

@@ -1,0 +1,100 @@
+<div class="contenedor">
+    <div class="herramientas">
+        <mat-form-field>
+            <mat-label>Buscar...</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Java" #input>
+        </mat-form-field>
+
+        <button mat-raised-button class="crear" color="primary" (click)="openDialogCrear('Crear')"><fa-icon
+                [icon]="faPlus"></fa-icon> Crear Exámen</button>
+        <button mat-fab class="crear-mobile" color="primary" (click)="openDialogCrear('Crear')"><fa-icon
+                [icon]="faPlus"></fa-icon></button>
+    </div>
+
+    <div class="mat-elevation-z8 contenedor-table">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="id">
+                <th class="id" mat-header-cell *matHeaderCellDef> ID </th>
+                <td class="id" mat-cell *matCellDef="let i = index;"><span class="mobile-label"> ID:</span> {{i + 1}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="titulo">
+                <th class="cabecera" mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
+                <td class="celda" mat-cell *matCellDef="let row"> <span class="mobile-label">Titulo:</span>
+                    {{row.titulo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="descripcion">
+                <th class="cabecera" mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+                <td class="celda" mat-cell *matCellDef="let row"> <span class="mobile-label">Descripción:</span>
+                    {{row.descripcion}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="puntosMaximos">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Pts Max </th>
+                <td class="celda text-center" mat-cell *matCellDef="let row"> <span class="mobile-label">Pts Max:</span>
+                    {{row.puntosMaximos}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="numeroDePreguntas">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> N° Preguntas </th>
+                <td class="celda text-center" mat-cell *matCellDef="let row"> <span class="mobile-label">N°
+                        Preguntas:</span> {{row.numeroDePreguntas}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="categoria">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Categoria </th>
+                <td class="celda text-center" mat-cell *matCellDef="let row"> <span
+                        class="mobile-label">Categoria:</span> {{row.categoria.titulo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="intentos">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Intentos </th>
+                <td class="celda text-center" mat-cell *matCellDef="let row"> <span
+                        class="mobile-label">Intentos:</span> {{row.numeroDePreguntas}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="preguntas">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Preguntas </th>
+                <td class="celda text-center" mat-cell *matCellDef="let row">
+                    <span class="mobile-label">Preguntas:</span>
+                    <a mat-icon-button color="primary" matTooltip="Ver Preguntas" [routerLink]="['/admin/ver-preguntas/' + row.examenId]">
+                        <mat-icon>list</mat-icon>
+                    </a>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="estado">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                <td class="celda text-center" mat-cell *matCellDef="let row">
+                    <span class="mobile-label">Estado:</span> <fa-icon
+                        [icon]="row.activo ? faEye : faEyeSlash"></fa-icon>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="acciones">
+                <th class="celda-acciones text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+                <td class="celda-acciones" mat-cell *matCellDef="let row">
+                    <div class="acciones">
+                        <fa-icon [icon]="faEdit" (click)="openDialogEditar('Editar',row)" class="accion-edit" matTooltip="Editar"></fa-icon>
+                        /
+                        <fa-icon [icon]="faTrash" (click)="eliminarExamen(row.examenId)" class="accion-delete" matTooltip="Eliminar"></fa-icon>
+                    </div>
+
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+            <tr class="mat-row" *matNoDataRow>
+                <td class="celda" class="mat-cell" colspan="4"> No existen registros para el filtro "{{input.value}}"
+                </td>
+            </tr>
+        </table>
+        
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Páginas de categorias"></mat-paginator>
+</div>

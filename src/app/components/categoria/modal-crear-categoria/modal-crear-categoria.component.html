@@ -1,0 +1,22 @@
+<h1 mat-dialog-title class="title-modal">{{ data.accion }} Categoria</h1>
+<form [formGroup]="form" (ngSubmit)="formSubmit()">
+    <div mat-dialog-content class="form-group">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Titulo</mat-label>
+            <input matInput type="text" required formControlName="titulo">
+            <mat-error *ngIf="titulo?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput required formControlName="descripcion"></textarea>
+            <mat-error *ngIf="descripcion?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions class="modal-footer">
+        <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
+        <button mat-raised-button color="primary" type="submit" cdkFocusInitial>{{ data.accion }}</button>
+    </div>
+</form>

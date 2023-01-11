@@ -1,0 +1,79 @@
+.pregunta-card{
+    margin-bottom: 2em;
+}
+
+mat-radio-group{
+    display: grid;
+    gap: 10px;
+}
+
+p{
+    white-space: pre-wrap!important;        
+    margin: 0;
+}
+
+.contenedor-evaluar-examen{
+    display: flex;
+    justify-content: center;
+}
+
+.cuestionario{
+    display: grid;
+    grid-template-columns: 80% 20%;
+}
+
+.contenedor-temporizador{
+    position: relative;
+}
+
+.temporizador{
+    width: 90%;
+    top: 0;
+    right: 0;
+    position: absolute;
+    text-align: center;
+}
+
+.abrir-temporizador-mobile{
+    display: none;
+    position: fixed;
+    top: 60px;
+    right: 8px;
+}
+
+fa-icon{
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.contenedor-temporizador-mobile{
+    display: none;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    z-index: 99;
+}
+
+@media(max-width: 1250px) {
+
+    .contenedor-temporizador-mobile{
+        display: block;
+    }
+
+    .abrir-temporizador-mobile{
+        display: block;
+    }
+
+    .contenedor-temporizador{
+        display: none;        
+    }
+
+    .cuestionario{
+        display: block
+    }
+
+}
+
+
+
+

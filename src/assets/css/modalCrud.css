@@ -1,0 +1,28 @@
+.title-modal{
+    font-family: 'Poppins', sans-serif;   
+    font-weight: 600;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+mat-form-field{
+    width: 90%;
+    margin: auto;
+}
+
+.modal-footer{
+    display: flex;
+    justify-content: end;
+}
+
+textarea{
+    min-height: 45px;
+}
+
+.cdk-overlay-1{
+    left: 149.2969px!important;
+}

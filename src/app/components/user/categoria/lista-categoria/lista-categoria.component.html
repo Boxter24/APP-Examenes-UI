@@ -1,0 +1,18 @@
+<div class="contenedor">
+    <a routerLink="/user/categoria/{{categoria.categoriaId}}" *ngFor="let categoria of categorias">
+        <mat-card class="card">    
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <mat-card-title class="title-card">{{ categoria.titulo }}</mat-card-title>            
+                <p class="text-card">
+                    {{ categoria.descripcion }}
+                </p>
+            </mat-card-content>        
+        </mat-card>
+    </a>
+
+    <div class="sin-registros" *ngIf="categorias.length == 0">
+        <h2>No existen Categorias Creadas</h2>
+        <img src="../../../../../assets/images/sin-registros.svg" alt="Sin Categorias">
+    </div>
+</div>

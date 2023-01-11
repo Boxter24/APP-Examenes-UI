@@ -1,0 +1,53 @@
+<div class="contenedor">
+    <div class="herramientas">
+        <mat-form-field>
+            <mat-label>Buscar...</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Java" #input>        
+        </mat-form-field>
+        
+        <button mat-raised-button class="crear" color="primary" (click)="openDialogCrear('Crear')"><fa-icon [icon]="faPlus"></fa-icon> Crear Categoria</button>    
+        <button mat-fab class="crear-mobile" color="primary" (click)="openDialogCrear('Crear')"><fa-icon [icon]="faPlus"></fa-icon></button>    
+    </div>
+    
+    <div class="mat-elevation-z8 contenedor-table">
+        <table mat-table [dataSource]="dataSource" matSort>
+            
+            <!-- Implicit Column -->
+            <ng-container matColumnDef="id">
+                <th class="id" mat-header-cell *matHeaderCellDef> ID </th>
+                <td class="id" mat-cell *matCellDef="let i = index;"><span class="mobile-label">ID:</span> {{i + 1}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="titulo">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
+                <td class="celda" mat-cell *matCellDef="let row">  <span class="mobile-label">Titulo:</span> {{row.titulo}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="descripcion">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
+                <td class="celda"mat-cell *matCellDef="let row">  <span class="mobile-label">Descripción:</span> {{row.descripcion}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="acciones">            
+                <th class="celda-acciones text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+                <td class="celda-acciones" mat-cell *matCellDef="let row">
+                    <div class="acciones">
+                        <fa-icon [icon]="faEdit" (click)="openDialogEditar('Editar',row)" class="accion-edit" matTooltip="Editar"></fa-icon>
+                        /
+                        <fa-icon [icon]="faTrash" (click)="eliminarCategoria(row.categoriaId)" class="accion-delete" matTooltip="Eliminar"></fa-icon>
+                    </div>                              
+    
+                </td>            
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            
+            <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4"> No existen registros para el filtro "{{input.value}}"</td>
+            </tr>
+        </table>
+            
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Páginas de categorias"></mat-paginator>
+</div>

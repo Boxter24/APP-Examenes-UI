@@ -1,0 +1,89 @@
+<div class="container-header">
+    <div class="header-perfil">    
+
+        <div class="info-principal-user">
+
+            <div class="nombre-user">
+                <p>{{ usuario.nombre }}  {{ usuario.apellido }}</p>
+            </div>
+
+            <div class="info-user">
+                <div class="content-img-user">       
+                        
+                        <label *ngIf="!usuario?.foto" class="img-user" for="image">
+                            <div class="contenedor-img">
+                                <p class="text-change-image"></p>
+                            <img src="../../../../assets/images/user-default.png" alt="Upload Image">
+                            </div>                            
+                        </label>
+                        <label *ngIf="usuario?.foto" class="img-user" for="image">
+                            <div class="contenedor-img">
+                                <p class="text-change-image"></p>
+                                <img src="http://localhost:8080/usuarios/imagen/{{usuario.foto}}" alt="{{usuario.foto}}">
+                            </div>                                                        
+                        </label>           
+                        
+                        <input #input type="file" name="image" id="image" (change)="cambiarFoto($event)">                                                     
+                                            
+                </div>
+
+            
+                <ul class="data-user">
+                    <li class="data-left">
+                        <p>PTS</p>
+                        <p>55</p>
+                    </li>
+                    <li class="data-center">
+                        <p>Exams</p>
+                        <p>5</p>
+                    </li>
+                    <li class="data-right">
+                        <p>Rank</p>
+                        <p>16</p>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="info-extra-user">
+            <div class="redes-user">
+                <ul class="redes">
+                    <li class="link-red">Linkedin</li>
+                    <li class="link-red">Github</li>
+                </ul>
+            </div>
+            <div class="descripcion-user">                            
+                
+                <p>
+                    <mat-icon matPrefix>
+                        <fa-icon [icon]="faUser"></fa-icon>
+                    </mat-icon>  
+                    {{ usuario.username | titlecase }}
+                    <span *ngIf="usuario.username == ''">{{ noData('Username') }}</span>
+                </p>
+                <p>
+                    <mat-icon matPrefix>
+                        <fa-icon [icon]="faEnvelope"></fa-icon>
+                    </mat-icon>   
+                    {{ usuario.email }}
+                    <span *ngIf="usuario.email == ''">{{ noData('Email') }}</span>
+                </p>
+                <p>
+                    <mat-icon matPrefix>
+                        <fa-icon [icon]="faPhone"></fa-icon>
+                    </mat-icon> 
+                    {{ usuario.telefono | telefono }}
+                    <span *ngIf="usuario.telefono == ''">{{ noData('Teléfono') }}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="edit-data-user">    
+                
+    <h2 class="title">Insígnias Conseguidas</h2>
+                
+</div>
+

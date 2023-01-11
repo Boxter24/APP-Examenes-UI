@@ -1,0 +1,51 @@
+<h1 mat-dialog-title class="title-modal">{{ data.accion }} Categoria</h1>
+<form [formGroup]="form" (ngSubmit)="formSubmit()">
+    <div mat-dialog-content class="form-group">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Titulo</mat-label>
+            <input matInput type="text" required formControlName="contenido">
+            <mat-error *ngIf="contenido?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Opcion 1</mat-label>
+            <textarea type="text" matInput required formControlName="opcion1"></textarea>
+            <mat-error *ngIf="opcion1?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Opcion 2</mat-label>
+            <textarea type="text" matInput required formControlName="opcion2"></textarea>
+            <mat-error *ngIf="opcion2?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Opcion 3</mat-label>
+            <textarea type="text" matInput required formControlName="opcion3"></textarea>
+            <mat-error *ngIf="opcion3?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Opcion 4</mat-label>
+            <textarea type="text" matInput required formControlName="opcion4"></textarea>
+            <mat-error *ngIf="opcion4?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Respuesta</mat-label>
+            <mat-select required formControlName="respuesta" [value]="pregunta.respuesta">
+                <mat-option *ngIf="pregunta.opcion1" [value]="pregunta.opcion1">Opción 1</mat-option>
+                <mat-option *ngIf="pregunta.opcion2" [value]="pregunta.opcion2">Opción 2</mat-option>
+                <mat-option *ngIf="pregunta.opcion3" [value]="pregunta.opcion3">Opción 3</mat-option>
+                <mat-option *ngIf="pregunta.opcion4" [value]="pregunta.opcion4">Opción 4</mat-option>
+            </mat-select>
+            <mat-error *ngIf="respuesta?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+    </div>
+    <div mat-dialog-actions class="modal-footer">
+        <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
+        <button mat-raised-button color="primary" type="submit" cdkFocusInitial>{{ data.accion }}</button>
+    </div>
+</form>

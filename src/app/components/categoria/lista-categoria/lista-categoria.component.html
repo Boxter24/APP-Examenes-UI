@@ -1,0 +1,11 @@
+<div class="contenedor">
+    <mat-card class="card" *ngFor="let categoria of categorias">    
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+            <mat-card-title class="title-card">{{ categoria.titulo }}</mat-card-title>            
+            <p class="text-card">
+                {{ categoria.descripcion }}
+            </p>
+        </mat-card-content>        
+    </mat-card>
+</div>

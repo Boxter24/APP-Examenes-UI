@@ -1,0 +1,17 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.nav-item > fa-icon{
+    margin-right: 5px;
+}
+
+.link{
+    font-weight: bolder;
+    cursor: pointer;
+    color: black;
+}
+
+.link:hover{
+    color: rgb(186, 26, 26);
+} 

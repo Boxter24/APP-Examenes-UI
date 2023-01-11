@@ -1,0 +1,92 @@
+<div class="contenedor">
+
+    <div class="contenedor-cuestionario" *ngIf="!enviado">
+        <div class="cuestionario">
+
+            <div class="abrir-temporizador-mobile" (click)="abrirTemporizadorMobile()">
+                <fa-icon [icon]="faClock"></fa-icon>
+            </div>
+
+            <mat-card class="contenedor-temporizador-mobile" *ngIf="mostrarTemporizadorMobile">
+                <mat-card-title>
+                    Temporizador
+                </mat-card-title>
+                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                <h2 class="text-center">{{ obtenerHoraFormateada() }}</h2>
+            </mat-card>
+
+            <div class="preguntas">
+                <mat-card class="pregunta-card" *ngFor="let pregunta of preguntas">
+                    <mat-card-header>
+                        <mat-card-title class="titulo">{{ pregunta.contenido }}</mat-card-title>
+                        <mat-card-subtitle>Seleccione una respuesta:</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+
+                        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+                            [(ngModel)]="pregunta.respuestaDada">
+                            <mat-radio-button [value]="pregunta.opcion1" color="primary" class="radio-button-content">
+                                <p>{{ pregunta.opcion1 }}</p>
+                            </mat-radio-button>
+
+                            <mat-radio-button [value]="pregunta.opcion2" color="primary" class="radio-button-content">
+                                <p>{{ pregunta.opcion2 }}</p>
+                            </mat-radio-button>
+
+                            <mat-radio-button [value]="pregunta.opcion3" color="primary" class="radio-button-content">
+                                <p>{{ pregunta.opcion3 }}</p>
+                            </mat-radio-button>
+
+                            <mat-radio-button [value]="pregunta.opcion4" color="primary" class="radio-button-content">
+                                <p>{{ pregunta.opcion4 }}</p>
+                            </mat-radio-button>
+                        </mat-radio-group>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+            <div class="contenedor-temporizador">
+                <mat-card class="temporizador">
+                    <mat-card-header>
+                        <mat-card-title>
+                            Temporizador
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            El cuestionario se enviará automáticamente cuando el temporizador llegue 0:0
+                        </mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <h2 class="text-center">{{ obtenerHoraFormateada() }}</h2>
+                        <mat-spinner mode="determinate" style="margin: auto;"
+                            [value]="(timer/(this.preguntas!.length * 2 * 60)*100)"></mat-spinner>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+        </div>
+
+        <div class="contenedor contenedor-evaluar-examen">
+            <button mat-raised-button color="primary" class="añadir-pregunta" matTooltip="Evaluar Examen"
+                (click)="evaluarExamen()">Enviar Cuestionario</button>
+        </div>
+    </div>
+
+    <div class="resultado" *ngIf="enviado">
+
+        <mat-card class="text-center">
+            <mat-card-header>
+                <mat-card-title class="titulo">Resultados:</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <h2>Puntos Conseguidos: {{ puntosConseguidos }}</h2>
+                <h2>Respuestas Correctas: {{ respuestasCorrectas }}</h2>
+            </mat-card-content>
+            <mat-card-actions class="text-center">
+                <button (click)="imprimirPagina()" mat-raised-button color="primary">Imprimir</button>
+                <button mat-raised-button color="accent" [routerLink]="'/user'">Inicio</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+</div>

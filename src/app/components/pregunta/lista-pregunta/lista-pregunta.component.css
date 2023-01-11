@@ -1,0 +1,35 @@
+.pregunta-card{
+    margin-bottom: 2em;
+}
+
+mat-list{
+    display: grid;
+    gap: .5em;
+}
+
+mat-list-item{
+    height: auto!important;
+}
+
+mat-icon{
+    margin-right: 8px;
+}
+
+p{
+    white-space: pre-wrap!important;
+    margin: 0;
+    text-align: justify;
+}
+
+.respuesta{
+    margin-top: 1em;
+}
+
+.contenedor-añadir-pregunta{
+    display: flex;
+    justify-content: center;
+}
+
+.añadir-pregunta:hover{    
+    transform: scale(110%);
+}
