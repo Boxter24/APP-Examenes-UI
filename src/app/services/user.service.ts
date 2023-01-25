@@ -10,8 +10,20 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  listarUsuarios(): any{
+    return this.http.get(`${baseUrl}/usuarios`);
+  }  
+
   añadirUsuario(user: Usuario): any{
     return this.http.post(`${baseUrl}/usuarios/`,user);
+  }  
+
+  actualizarUsuario(user: Usuario): any{
+    return this.http.put(`${baseUrl}/usuarios/`,user);
+  }  
+
+  eliminarUsuario(usuarioId: any): any{
+    return this.http.delete(`${baseUrl}/usuarios/`,usuarioId);
   }  
 
   cambiarFoto(archivo: File, id: any): any{

@@ -20,8 +20,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 /*============================== Pages ============================== */
 import { AuthComponent } from './pages/auth/auth.component';
-import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
-import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+
 
 /*============================== Components ============================== */
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -38,14 +38,14 @@ import { ListaCategoriaComponent } from './components/categoria/lista-categoria/
 import { ListaCategoriaComponent as ListaCategoriaUserComponent } from './components/user/categoria/lista-categoria/lista-categoria.component';
 import { ModalCrearCategoriaComponent } from './components/categoria/modal-crear-categoria/modal-crear-categoria.component';
 import { CrearExamenComponent } from './components/examen/crear-examen/crear-examen.component';
-import { ListaExamenComponent } from './components/examen/lista-examen/lista-examen.component';
 import { ModalCrearExamenComponent } from './components/examen/modal-crear-examen/modal-crear-examen.component';
 import { ListaPreguntaComponent } from './components/pregunta/lista-pregunta/lista-pregunta.component';
 import { ModalCrearPreguntaComponent } from './components/pregunta/modal-crear-pregunta/modal-crear-pregunta.component';
-import { SidebarUserComponent } from './components/user/sidebar-user/sidebar-user.component';
 import { ExamenesPorCategoriaComponent } from './components/user/examen/examenes-por-categoria/examenes-por-categoria.component';
 import { InstruccionesExamenComponent } from './components/user/examen/instrucciones-examen/instrucciones-examen.component';
 import { ComenzarExamenComponent } from './components/user/examen/comenzar-examen/comenzar-examen.component';
+import { CrearUsuarioComponent } from './components/admin/usuario/crear-usuario/crear-usuario.component';
+import { ModalCrearUsuarioComponent } from './components/admin/usuario/modal-crear-usuario/modal-crear-usuario.component';
 
 @NgModule({
   declarations: [
@@ -53,11 +53,10 @@ import { ComenzarExamenComponent } from './components/user/examen/comenzar-exame
     NavbarComponent,    
     AuthComponent, 
     SigninComponent, 
-    SignupComponent, 
-    DashboardComponent,
-    UserDashboardComponent,
+    SignupComponent,     
     HomeComponent,
     WelcomeComponent,
+    DashboardComponent,
     SidebarComponent,
     PerfilComponent,
     TelefonoPipe,    
@@ -65,15 +64,15 @@ import { ComenzarExamenComponent } from './components/user/examen/comenzar-exame
     ListaCategoriaComponent,
     ListaCategoriaUserComponent,
     ModalCrearCategoriaComponent,    
-    CrearExamenComponent,
-    ListaExamenComponent,
+    CrearExamenComponent,    
     ModalCrearExamenComponent,
     ListaPreguntaComponent,
-    ModalCrearPreguntaComponent,
-    SidebarUserComponent,
+    ModalCrearPreguntaComponent,    
     ExamenesPorCategoriaComponent,
     InstruccionesExamenComponent,
-    ComenzarExamenComponent,    
+    ComenzarExamenComponent,
+    CrearUsuarioComponent,
+    ModalCrearUsuarioComponent,    
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ export class Examen {
     descripcion: string = '';
     puntosMaximos: number = 0;
     numeroDePreguntas: number = 0;
+    intentos: number = 0;
     activo!: boolean;
     categoria!: Categoria;    
 }

@@ -1,3 +1,4 @@
+import { Usuario } from 'src/app/models/usuario';
 import { SignData } from './../models/signinData';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -17,8 +18,7 @@ export class SigninService {
     private cambiarFotoService: CambiarFotoService
   ) { }
 
-  generateToken(signData: SignData): any{
-    console.log(signData);
+  generateToken(signData: SignData): any{    
     return this.http.post(`${baseUrl}/generate-token`,signData);
   }
 
@@ -59,6 +59,18 @@ export class SigninService {
     
     if(userStr != null){
       return JSON.parse(userStr);
+    }else{
+      this.logout();
+      return null;
+    }
+  }
+
+  getUserId(): any{
+    let userStr = localStorage.getItem('user');    
+    
+    if(userStr != null){
+      let jsonUser: Usuario = JSON.parse(userStr);
+      return jsonUser.id;
     }else{
       this.logout();
       return null;

@@ -1,47 +1,54 @@
 <div class="contenedor">
-    <mat-card class="pregunta-card" *ngFor="let pregunta of preguntas">
-        <mat-card-header>
-            <mat-card-title class="titulo">{{ pregunta.contenido }}</mat-card-title>
-            <mat-card-subtitle>Seleccione una respuesta:</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
+    <div class="no-data" *ngIf="preguntas.length == 0, else sinPreguntas">
+        <h2 class="titulo">No hay preguntas para éste examen</h2>
+    </div>
+    <ng-template #sinPreguntas>
+    
+        <mat-card class="pregunta-card" *ngFor="let pregunta of preguntas">
+            <mat-card-header>
+                <mat-card-title class="titulo">{{ pregunta.contenido }}</mat-card-title>
+                <mat-card-subtitle>Seleccione una respuesta:</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
 
-            <mat-list>                
-                <mat-list-item>
-                    <mat-icon matListItemIcon>assignment</mat-icon>
-                    <div matListItemTitle><p>{{ pregunta.opcion1 }}</p></div>                    
-                </mat-list-item>
+                <mat-list>                
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>assignment</mat-icon>
+                        <div matListItemTitle><p>{{ pregunta.opcion1 }}</p></div>                    
+                    </mat-list-item>
 
-                <mat-list-item>
-                    <mat-icon matListItemIcon>assignment</mat-icon>
-                    <div matListItemTitle><p>{{ pregunta.opcion2 }}</p></div>                    
-                </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>assignment</mat-icon>
+                        <div matListItemTitle><p>{{ pregunta.opcion2 }}</p></div>                    
+                    </mat-list-item>
 
-                <mat-list-item>
-                    <mat-icon matListItemIcon>assignment</mat-icon>
-                    <div matListItemTitle><p>{{ pregunta.opcion3 }}</p></div>                    
-                </mat-list-item>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>assignment</mat-icon>
+                        <div matListItemTitle><p>{{ pregunta.opcion3 }}</p></div>                    
+                    </mat-list-item>
 
-                <mat-list-item>
-                    <mat-icon matListItemIcon>assignment</mat-icon>
-                    <div matListItemTitle><p>{{ pregunta.opcion4 }}</p></div>                    
-                </mat-list-item> 
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>assignment</mat-icon>
+                        <div matListItemTitle><p>{{ pregunta.opcion4 }}</p></div>                    
+                    </mat-list-item> 
 
-            </mat-list>                
+                </mat-list>                
 
-            <p class="respuesta">
-                <strong>Respuesta: </strong>
-                {{pregunta.respuesta }}
-            </p>
+                <p class="respuesta">
+                    <strong>Respuesta: </strong>
+                    {{pregunta.respuesta }}
+                </p>
 
-        </mat-card-content>
-        <mat-divider></mat-divider>
-        <mat-card-actions>
-            <button mat-raised-button color="warn"
-                (click)="eliminarPreguntaDelExamen(pregunta.preguntaId)">Eliminar</button>
-            <button mat-raised-button color="primary" (click)="openDialogEditar('Editar',pregunta)">Editar</button>
-        </mat-card-actions>
-    </mat-card>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions>
+                <button mat-raised-button color="warn"
+                    (click)="eliminarPreguntaDelExamen(pregunta.preguntaId)">Eliminar</button>
+                <button mat-raised-button color="primary" (click)="openDialogEditar('Editar',pregunta)">Editar</button>
+            </mat-card-actions>
+        </mat-card>
+
+    </ng-template>
 
     <div class="contenedor contenedor-añadir-pregunta" *ngIf="preguntas.length < numeroDePreguntas">
         <button mat-raised-button color="primary" class="añadir-pregunta" matTooltip="Añadir Pregunta"

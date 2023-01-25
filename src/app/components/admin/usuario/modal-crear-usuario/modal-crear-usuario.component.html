@@ -1,0 +1,47 @@
+<h1 mat-dialog-title class="title-modal">{{ data.accion }} Usuario</h1>
+<form [formGroup]="form" (ngSubmit)="formSubmit()">
+    <div mat-dialog-content class="form-group">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" required formControlName="username">
+            <mat-error *ngIf="username?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre Completo</mat-label>
+            <input matInput type="text" required formControlName="nombreCompleto">
+            <mat-error *ngIf="nombreCompleto?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Teléfono</mat-label>
+            <input matInput type="text" required formControlName="telefono">
+            <mat-error *ngIf="telefono?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput type="text" required formControlName="email">
+            <mat-error *ngIf="email?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>  
+        
+        <mat-form-field appearance="fill">
+            <mat-label>Rol</mat-label>
+            <mat-select formControlName="rol">                
+                <mat-option *ngFor="let rol of roles" [value]="rol.rolId">{{ rol.rolNombre }}</mat-option>            
+            </mat-select>
+        </mat-form-field>        
+
+        <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput type="password" required formControlName="password">
+            <mat-error *ngIf="password?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>  
+
+    </div>
+    <div mat-dialog-actions class="modal-footer">
+        <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
+        <button mat-raised-button color="primary" type="submit" cdkFocusInitial>{{ data.accion }}</button>
+    </div>
+</form>

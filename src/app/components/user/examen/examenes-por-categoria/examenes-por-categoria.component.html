@@ -8,12 +8,14 @@
                     {{ examen.descripcion }}
                 </p>
             </mat-card-content>            
-            <mat-card-actions>                
-                <a mat-raised-button color="primary" [routerLink]="['/user/examen/instrucciones/' + examen.examenId]">Ver</a>
-                <a mat-raised-button color="warn" [routerLink]="['/user/examen/instrucciones/' + examen.examenId]">Empezar</a>
-
+            
+            <div>
                 <span>Preguntas: {{ examen.numeroDePreguntas }}  </span>
                 <span>  Pts: {{ examen.puntosMaximos }}</span>
+            </div>            
+
+            <mat-card-actions>                                
+                <a mat-raised-button color="warn" [routerLink]="['/user/examen/instrucciones/' + examen.examenId]">Empezar</a>
             </mat-card-actions>            
         </div>        
     </mat-card>

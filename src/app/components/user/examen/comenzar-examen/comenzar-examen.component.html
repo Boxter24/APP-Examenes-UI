@@ -11,7 +11,7 @@
                 <mat-card-title>
                     Temporizador
                 </mat-card-title>
-                <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                <mat-progress-bar mode="determinate" [value]="(timer/(this.preguntas!.length * 2 * 60)*100)"></mat-progress-bar>
                 <h2 class="text-center">{{ obtenerHoraFormateada() }}</h2>
             </mat-card>
 
@@ -53,7 +53,7 @@
                             Temporizador
                         </mat-card-title>
                         <mat-card-subtitle>
-                            El cuestionario se enviará automáticamente cuando el temporizador llegue 0:0
+                            El cuestionario se enviará automáticamente cuando el temporizador llegue 00:00
                         </mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>

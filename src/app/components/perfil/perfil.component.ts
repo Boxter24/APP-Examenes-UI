@@ -1,11 +1,14 @@
+import { ResultadoExamenService } from './../../services/resultado-examen.service';
 import { Usuario } from './../../models/usuario';
 import { Component, OnInit } from '@angular/core';
 import  {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faUser, faEnvelope, faLock, faPhone, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { ResultadoExamen } from 'src/app/models/resultadoExamen';
 import { CambiarFotoService } from 'src/app/services/cambiar-foto.service';
 import { SigninService } from 'src/app/services/signin.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
+import { IntentoExamenService } from 'src/app/services/intento-examen.service';
 
 @Component({
   selector: 'app-perfil',
@@ -24,6 +27,10 @@ export class PerfilComponent implements OnInit {
   faPencilAlt = faPencilAlt;
   formMode: boolean = true;  
   signupForm: FormGroup; 
+  resultadoExamen: ResultadoExamen[] = [];
+  public puntos: any;
+  public rank: number = 0;
+  public examenes: number = 0;
 
   constructor(
     private _builder: FormBuilder,
@@ -32,6 +39,8 @@ export class PerfilComponent implements OnInit {
     private user: Usuario,
     private cambiarFotoService: CambiarFotoService,
     private signinService: SigninService,
+    private intentoExamenService: IntentoExamenService,
+    private resultadoExamenService: ResultadoExamenService
   ) {     
 
     this.usuario = this.dataUser.getUser();
@@ -39,8 +48,7 @@ export class PerfilComponent implements OnInit {
     this.signupForm = this._builder.group({
       username: [this.usuario.username, Validators.required],
       telefono: [this.usuario.telefono, Validators.required],
-      nombre: [this.usuario.nombre, Validators.required],
-      apellido: [this.usuario.apellido, Validators.required],
+      nombreCompleto: [this.usuario.nombreCompleto, Validators.required],      
       password: ['', Validators.required],
       email: [this.usuario.email, Validators.compose([Validators.email, Validators.required])],
     })
@@ -54,8 +62,7 @@ export class PerfilComponent implements OnInit {
     //Binding Data
     this.signupForm.controls['username'].valueChanges.subscribe(data => this.user.username = data)
     this.signupForm.controls['password'].valueChanges.subscribe(data => this.user.password = data)
-    this.signupForm.controls['nombre'].valueChanges.subscribe(data => this.user.nombre = data)
-    this.signupForm.controls['apellido'].valueChanges.subscribe(data => this.user.apellido = data)    
+    this.signupForm.controls['nombreCompleto'].valueChanges.subscribe(data => this.user.nombreCompleto = data)      
     this.signupForm.controls['telefono'].valueChanges.subscribe(data => this.user.telefono = data)    
     this.signupForm.controls['email'].valueChanges.subscribe(data => this.user.email = data)
 
@@ -67,6 +74,7 @@ export class PerfilComponent implements OnInit {
         this.signinService.setUser(this.usuario)
       }
     )
+    this.conteoIntentosGenerales();      
 
   }
 
@@ -83,12 +91,8 @@ export class PerfilComponent implements OnInit {
     return this.signupForm.get('telefono');
   }
 
-  get nombre(){
-    return this.signupForm.get('nombre');
-  }
-
-  get apellido(){
-    return this.signupForm.get('apellido');
+  get nombreCompleto(){
+    return this.signupForm.get('nombreCompleto');
   }
 
   get password(){
@@ -147,6 +151,41 @@ export class PerfilComponent implements OnInit {
     )
   }
 
-  
+  obtenerResultadosDeExamenes(examenesRealizados: number): void {
+    this.resultadoExamenService.obtenerResultadosDeExamenes(this.usuario.id).subscribe(
+      (data: any) => {
+          if(data.suma != null){
+            this.puntos = Math.round(data.suma/examenesRealizados);                                                                           
+          }
+          else{
+            this.puntos = null;
+          }        
+          
+      },(error: any) => {
+        Swal.fire('Ooops', 'Hubo un error al cargar la información', 'error')
+      }
+    )
+  }
+
+  formatoDePuntaje(puntos: any): any {
+    if(puntos == null){
+      return 'Sin Puntaje'
+    }
+
+    return puntos + '/20'
+  }
+
+  conteoIntentosGenerales(): void {
+    this.intentoExamenService.conteoIntentosGenerales(this.usuario.id).subscribe(
+      (data: any) => {        
+        this.examenes = data.conteo 
+        
+        this.obtenerResultadosDeExamenes(this.examenes);  
+
+    },(error: any) => {
+      Swal.fire('Ooops', 'Hubo un error al cargar la información', 'error')
+    }
+    )
+  }
 
 }

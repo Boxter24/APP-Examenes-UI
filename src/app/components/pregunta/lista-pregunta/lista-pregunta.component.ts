@@ -6,6 +6,7 @@ import { Pregunta } from 'src/app/models/pregunta';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalCrearPreguntaComponent } from '../modal-crear-pregunta/modal-crear-pregunta.component';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { ExamenService } from 'src/app/services/examen.service';
 
 @Component({
   selector: 'app-lista-pregunta',
@@ -19,17 +20,20 @@ export class ListaPreguntaComponent implements OnInit {
   preguntas: Pregunta[] = [];
   opcionSeleccionada: any;
   faPlus = faPlus;
-  numeroDePreguntas: number = 0;
+  numeroDePreguntas: number = 0;  
 
   constructor(
     private route: ActivatedRoute,
     private preguntaService: PreguntaService,
+    private examenService: ExamenService,
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
 
     this.examenId = this.route.snapshot.paramMap.get('examenId')!;
+
+    this.buscarExamen()
 
     this.listarPreguntasDelExamen();
 
@@ -38,10 +42,17 @@ export class ListaPreguntaComponent implements OnInit {
   listarPreguntasDelExamen(): void {
     this.preguntaService.listarPreguntasDelExamen(this.examenId).subscribe(
       (data: any) => {
-        this.preguntas = data;
-        if(this.preguntas.length > 0){
-          this.numeroDePreguntas = this.preguntas[0].examen.numeroDePreguntas;
-        }
+        this.preguntas = data;        
+      }, (error: any) => {
+        Swal.fire('Ooops', 'Hubo un error al cargar la información', 'error')
+      }
+    )
+  }
+
+  buscarExamen(): void {
+    this.examenService.obtenerNumeroDePreguntas(this.examenId).subscribe(
+      (data: any) => {
+        this.numeroDePreguntas = data;
       }, (error: any) => {
         Swal.fire('Ooops', 'Hubo un error al cargar la información', 'error')
       }

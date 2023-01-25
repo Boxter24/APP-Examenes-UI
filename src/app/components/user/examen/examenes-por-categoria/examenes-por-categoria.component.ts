@@ -13,7 +13,7 @@ export class ExamenesPorCategoriaComponent implements OnInit {
 
   /*===== Variables =====*/
   categoriaId!: string;
-  examenes: any[] = [];
+  examenes: Examen[] = [];
 
   constructor(
     private route: ActivatedRoute,

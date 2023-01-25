@@ -3,8 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 /*============================== Pages ============================== */
 import { AuthComponent } from './pages/auth/auth.component';
-import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
-import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 /*============================== Guards ============================== */
 import { AdminGuard } from './services/guards/admin.guard';
@@ -21,6 +20,7 @@ import { ListaPreguntaComponent } from './components/pregunta/lista-pregunta/lis
 import { ExamenesPorCategoriaComponent } from './components/user/examen/examenes-por-categoria/examenes-por-categoria.component';
 import { InstruccionesExamenComponent } from './components/user/examen/instrucciones-examen/instrucciones-examen.component';
 import { ComenzarExamenComponent } from './components/user/examen/comenzar-examen/comenzar-examen.component';
+import { CrearUsuarioComponent } from './components/admin/usuario/crear-usuario/crear-usuario.component';
 
 
 const routes: Routes = [
@@ -46,6 +46,10 @@ const routes: Routes = [
             {
                 path: 'perfil',
                 component: PerfilComponent
+            },
+            {
+                path: 'usuario/crear',
+                component: CrearUsuarioComponent
             },            
             {
                 path: 'categoria/crear',
@@ -63,7 +67,7 @@ const routes: Routes = [
     },
     {
         path: 'user', 
-        component: UserDashboardComponent,           
+        component: DashboardComponent,           
         canActivate: [NormalGuard],
         children: [
             {

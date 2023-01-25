@@ -27,9 +27,15 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill">
+            <mat-label>N° de Intentos</mat-label>
+            <input matInput type="number" required formControlName="intentos">
+            <mat-error *ngIf="intentos?.errors">{{ getErrorMessageRequired() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
             <mat-label>Categoria</mat-label>
             <mat-select [(value)]="valueCategoria" formControlName="categoria">                
-                <mat-option *ngFor="let categoria of categorias" [value]="categoria.categoriaId">{{ categoria.titulo }}</mat-option>"                
+                <mat-option *ngFor="let categoria of categorias" [value]="categoria.categoriaId">{{ categoria.titulo }}</mat-option>               
             </mat-select>
         </mat-form-field>
 

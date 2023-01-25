@@ -5,7 +5,7 @@
             <input matInput (keyup)="applyFilter($event)" placeholder="Java" #input>        
         </mat-form-field>
         
-        <button mat-raised-button class="crear" color="primary" (click)="openDialogCrear('Crear')"><fa-icon [icon]="faPlus"></fa-icon> Crear Categoria</button>    
+        <button mat-raised-button class="crear" color="primary" (click)="openDialogCrear('Crear')"><fa-icon [icon]="faPlus"></fa-icon> Crear Usuario</button>    
         <button mat-fab class="crear-mobile" color="primary" (click)="openDialogCrear('Crear')"><fa-icon [icon]="faPlus"></fa-icon></button>    
     </div>
     
@@ -18,15 +18,25 @@
                 <td class="id" mat-cell *matCellDef="let i = index;"><span class="mobile-label">ID:</span> {{i + 1}} </td>
             </ng-container>
             
-            <ng-container matColumnDef="titulo">
-                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
-                <td class="celda" mat-cell *matCellDef="let row">  <span class="mobile-label">Titulo:</span> {{row.titulo}} </td>
+            <ng-container matColumnDef="fullname">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Completo </th>
+                <td class="celda" mat-cell *matCellDef="let row">  <span class="mobile-label">Nombre:</span> {{row.nombreCompleto}} </td>
             </ng-container>
         
-            <ng-container matColumnDef="descripcion">
-                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Descripción </th>
-                <td class="celda"mat-cell *matCellDef="let row">  <span class="mobile-label">Descripción:</span> {{row.descripcion}} </td>
+            <ng-container matColumnDef="username">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Username </th>
+                <td class="celda"mat-cell *matCellDef="let row">  <span class="mobile-label">Username:</span> {{row.username}} </td>
             </ng-container>
+
+            <ng-container matColumnDef="telefono">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Telefono </th>
+                <td class="celda"mat-cell *matCellDef="let row">  <span class="mobile-label">Telefono:</span> {{row.telefono? row.telefono:'Sin Teléfono'}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th class="cabecera text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+                <td class="celda"mat-cell *matCellDef="let row">  <span class="mobile-label">Email:</span> {{row.email? row.email:'Sin Email'}} </td>
+            </ng-container>            
             
             <ng-container matColumnDef="acciones">            
                 <th class="celda-acciones text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
@@ -34,7 +44,7 @@
                     <div class="acciones">
                         <fa-icon [icon]="faEdit" (click)="openDialogEditar('Editar',row)" class="accion-edit" matTooltip="Editar"></fa-icon>
                         /
-                        <fa-icon [icon]="faTrash" (click)="eliminarCategoria(row.categoriaId)" class="accion-delete" matTooltip="Eliminar"></fa-icon>
+                        <fa-icon [icon]="faTrash" (click)="eliminarUsuario(row.categoriaId)" class="accion-delete" matTooltip="Eliminar"></fa-icon>
                     </div>                              
     
                 </td>            

@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
   mode = new FormControl('over' as MatDrawerMode);
   
   user:any = null;
+  rol: any;
 
   constructor(
     public login:SigninService,
@@ -30,6 +31,9 @@ export class SidebarComponent implements OnInit {
         this.user.foto = data        
       }
     )
+
+    this.rol = this.user.authorities[0].authority;
+    
 
   }
 

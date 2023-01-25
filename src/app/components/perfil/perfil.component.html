@@ -4,7 +4,7 @@
         <div class="info-principal-user">
 
             <div class="nombre-user">
-                <p>{{ usuario.nombre }}  {{ usuario.apellido }}</p>
+                <p>{{ usuario.nombreCompleto }}</p>
             </div>
 
             <div class="info-user">
@@ -30,16 +30,16 @@
             
                 <ul class="data-user">
                     <li class="data-left">
-                        <p>PTS</p>
-                        <p>55</p>
+                        <p>Puntaje</p>
+                        <p>{{ formatoDePuntaje(puntos) }}</p>
                     </li>
                     <li class="data-center">
-                        <p>Exams</p>
-                        <p>5</p>
+                        <p>Valoración</p>
+                        <p>{{ puntos > 15 ? 'EXCELENTE':puntos > 10 ? 'BUENO':puntos > 0 ? 'DEFICIENTE':'Sin Valoración'}}</p>                        
                     </li>
                     <li class="data-right">
-                        <p>Rank</p>
-                        <p>16</p>
+                        <p>Examenes</p>
+                        <p>{{ examenes }}</p>
                     </li>
                 </ul>
             </div>

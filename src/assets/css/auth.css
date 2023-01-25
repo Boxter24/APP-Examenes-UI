@@ -100,14 +100,20 @@
 app-signin, app-signup, form {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 0rem 5rem;
+    justify-content: center;     
     transition: all 0.2s 0.7s;
-    overflow: hidden;
+    overflow: hidden;    
+    gap: .5rem;
+}
+
+app-signin, app-signup{
     grid-column: 1 / 2;
     grid-row: 1 / 2;
-    gap: .5rem;
+    padding: 0rem 1rem 0rem 4rem;
+}
+
+form{
+    flex-direction: column;   
 }
 
 .title {
@@ -119,13 +125,13 @@ app-signin, app-signup, form {
 }
 
 mat-form-field{
-    font-family: 'Poppins', sans-serif;          
+    font-family: 'Poppins', sans-serif;   
+    margin-left: 5px;
+    margin-right: 5px;       
 }
 
 .mat-form-field-full{    
-    width: 100%;
-    padding-left: 2px;
-    padding-right: 5px;
+    width: 100%;    
 }
 
 fa-icon{
@@ -159,7 +165,7 @@ td {
     color: #fff;
     text-transform: uppercase;
     font-weight: 600;
-    margin: 10px 0;
+    margin-top: -10px;
     cursor: pointer;
     transition: 0.5s;
 }
@@ -231,7 +237,7 @@ td {
     }
     .signin-signup {
         width: 100%;
-        top: 85%;
+        top: 90%;
         transform: translate(-50%, -100%);
         transition: 1s 0.8s ease-in-out;
     }
@@ -325,6 +331,14 @@ td {
         top: 5%;
         transform: translate(-50%, 0);
     }
+
+    app-signup{
+        padding-top: 0!important;
+    }
+
+    app-signin, app-signup{                
+        padding: 3rem;
+    }
 }
 
 @media (max-width: 570px) {
@@ -352,5 +366,14 @@ td {
     .container-auth.sign-up-mode:before {
         bottom: 28%;
         left: 50%;
+    }
+
+    app-signin, app-signup{  
+        padding-top: 0!important;      
+        padding: 1.5rem;
+    }
+
+    .mat-form-field-full{    
+        width: auto;    
     }
 }

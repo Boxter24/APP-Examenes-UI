@@ -1,7 +1,7 @@
-<a href="index3.html" class="brand-link">
+<div class="brand-link">
     <img src="../../../assets/images/logo1.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">AppExam</span>
-</a>
+</div>
 
 <div
     class="sidebar os-host os-theme-light os-host-overflow os-host-overflow-y os-host-resize-disabled os-host-scrollbar-horizontal-hidden os-host-transition">
@@ -22,7 +22,7 @@
                         <img *ngIf="user?.foto" src="http://localhost:8080/usuarios/imagen/{{user.foto}}" class="img-circle elevation-2" alt="{{user.foto}}">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">{{ user.username }}</a>
+                        <span style="color: white" class="d-block">{{ user.username }}</span>
                     </div>
                 </div>
 
@@ -54,46 +54,91 @@
                 </div>
 
                 <nav class="mt-2">
-                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    <div class="sidebarAdmin" *ngIf="rol == 'ADMIN'; else: sidebarUser">
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
 
-                        <li class="nav-item">
-                            <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
-                                class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Home
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a routerLink="/admin/perfil" routerLinkActive="active" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>
-                                    Perfil
-                                </p>
-                            </a>
-                        </li>                        
+                            <li class="nav-item">
+                                <a routerLink="/admin" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                    class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Home
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/admin/perfil" routerLinkActive="active" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Perfil
+                                    </p>
+                                </a>
+                            </li>                        
 
-                        <li class="nav-item">
-                            <a routerLink="/admin/categoria/crear" routerLinkActive="active" class="nav-link">
-                                <mat-icon matListItemIcon>category</mat-icon>
-                                <p>
-                                    Crear Categorías
-                                </p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a routerLink="/admin/usuario/crear" routerLinkActive="active" class="nav-link">
+                                    <i class="nav-icon fas fa-user"></i>
+                                    <p>
+                                        Crear Usuarios
+                                    </p>
+                                </a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a routerLink="/admin/examen/crear" routerLinkActive="active" class="nav-link">
-                                <mat-icon matListItemIcon>description</mat-icon>
-                                <p>
-                                    Crear Exámen
-                                </p>
-                            </a>
-                        </li>
+                            <li class="nav-item">
+                                <a routerLink="/admin/categoria/crear" routerLinkActive="active" class="nav-link">
+                                    <i class="nav-icon fas fa-layer-group"></i>
+                                    <p>
+                                        Crear Categorías
+                                    </p>
+                                </a>
+                            </li>
 
+                            <li class="nav-item">
+                                <a routerLink="/admin/examen/crear" routerLinkActive="active" class="nav-link">
+                                    <i class="nav-icon fas fa-file"></i>
+                                    <p>
+                                        Crear Exámen
+                                    </p>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>            
+                    <ng-template #sidebarUser>
+                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+
+                            <li class="nav-item">
+                                <a routerLink="/user" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
+                                    class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Home
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a routerLink="/user/perfil" routerLinkActive="active" class="nav-link">
+                                    <i class="nav-icon fas fa-th"></i>
+                                    <p>
+                                        Perfil
+                                    </p>
+                                </a>
+                            </li>                        
+
+                            <li class="nav-item">
+                                <a routerLink="categoria" routerLinkActive="active" class="nav-link">
+                                    <mat-icon matListItemIcon>category</mat-icon>
+                                    <p>
+                                        Ver Categorías
+                                    </p>
+                                </a>
+                            </li>
+                
                     </ul>
+                    </ng-template>                                                
+
                 </nav>
 
             </div>

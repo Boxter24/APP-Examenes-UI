@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalCrearExamenComponent } from './../modal-crear-examen/modal-crear-examen.component';
 import { Examen } from 'src/app/models/examen';
 import { ExamenService } from 'src/app/services/examen.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-crear-examen',
@@ -81,7 +82,7 @@ export class CrearExamenComponent {
       this.dataSource.paginator.firstPage();
     }
   }  
-
+  
   recargarLista(): void {
     this.examenService.listarExamenes().subscribe(
       (data: any) => {
@@ -89,13 +90,12 @@ export class CrearExamenComponent {
         
         // Assign the data to the data source for the table to render
         this.dataSource = new MatTableDataSource(data);
-
+        
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },(error: any) => {
         Swal.fire('Ooops!','Error al cargar Examenes','error')
       }
     );  
-  }
-
+  }  
 }

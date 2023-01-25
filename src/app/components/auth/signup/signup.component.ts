@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import  {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { faUser, faEnvelope, faLock, faPhone, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Usuario } from 'src/app/models/usuario';
+import { UsuarioRol } from 'src/app/models/usuarioRol';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -20,7 +21,8 @@ export class SignupComponent implements OnInit {
   faPhone = faPhone;
   faPencilAlt = faPencilAlt;
   formMode: boolean = true;  
-  signupForm: FormGroup;  
+  signupForm: FormGroup;
+  private usuarioRol!: UsuarioRol;
 
   constructor(
     private _builder: FormBuilder,
@@ -32,8 +34,7 @@ export class SignupComponent implements OnInit {
     this.signupForm = this._builder.group({
       username: ['', Validators.required],
       telefono: ['', Validators.required],
-      nombre: ['', Validators.required],
-      apellido: ['', Validators.required],
+      nombreCompleto: ['', Validators.required],      
       password: ['', Validators.required],
       email: ['', Validators.compose([Validators.email, Validators.required])],
     })
@@ -43,10 +44,9 @@ export class SignupComponent implements OnInit {
   ngOnInit(): void {
     this.signupForm.controls['username'].valueChanges.subscribe(data => this.user.username = data)
     this.signupForm.controls['password'].valueChanges.subscribe(data => this.user.password = data)
-    this.signupForm.controls['nombre'].valueChanges.subscribe(data => this.user.nombre = data)
-    this.signupForm.controls['apellido'].valueChanges.subscribe(data => this.user.apellido = data)    
+    this.signupForm.controls['nombreCompleto'].valueChanges.subscribe(data => this.user.nombreCompleto = data)      
     this.signupForm.controls['telefono'].valueChanges.subscribe(data => this.user.telefono = data)    
-    this.signupForm.controls['email'].valueChanges.subscribe(data => this.user.email = data)
+    this.signupForm.controls['email'].valueChanges.subscribe(data => this.user.email = data)    
   }
 
   /*===== Get Inputs FormGroup =====*/
@@ -58,13 +58,9 @@ export class SignupComponent implements OnInit {
     return this.signupForm.get('telefono');
   }
 
-  get nombre(){
-    return this.signupForm.get('nombre');
-  }
-
-  get apellido(){
-    return this.signupForm.get('apellido');
-  }
+  get nombreCompleto(){
+    return this.signupForm.get('nombreCompleto');
+  } 
 
   get password(){
     return this.signupForm.get('password');
@@ -89,6 +85,8 @@ export class SignupComponent implements OnInit {
   }  
 
   formSubmit(){
+    this.user.usuarioRol!.rol.rolId = 2  
+    this.user.usuarioRol!.rol.rolNombre = 'NORMAL'  ;
     if(this.signupForm.valid){
       this.userService.añadirUsuario(this.user).subscribe(
         (data: any) => {
@@ -99,7 +97,7 @@ export class SignupComponent implements OnInit {
           )    
         }
       );
-    }    
+    }
   }
 
 }

@@ -56,14 +56,12 @@ export class SigninComponent implements OnInit {
   formSubmit(){
     if(this.signinForm.valid){
       this.signinService.generateToken(this.signinData).subscribe(
-        (data: any) => {
-          console.log(data);
+        (data: any) => {          
           
           this.signinService.loginUser(data.token);
           this.signinService.getCurrentUser().subscribe(
             (user: any) => {
-              this.signinService.setUser(user);
-              console.log(user);
+              this.signinService.setUser(user);              
   
               if(this.signinService.getUserRole() == 'ADMIN'){
                 //Dashboard Admin

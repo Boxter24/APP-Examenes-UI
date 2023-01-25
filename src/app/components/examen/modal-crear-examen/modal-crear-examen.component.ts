@@ -34,6 +34,7 @@ export class ModalCrearExamenComponent implements OnInit {
       descripcion: ['', [Validators.required,Validators.maxLength(150)]],      
       puntosMaximos: ['', Validators.required],
       numeroDePreguntas: ['', Validators.required],      
+      intentos: ['', Validators.required],
       activo: ['', Validators.required],
       categoria: ['', Validators.required],
     })    
@@ -59,6 +60,7 @@ export class ModalCrearExamenComponent implements OnInit {
     this.form.controls['descripcion'].valueChanges.subscribe(data => this.examen.descripcion = data)  
     this.form.controls['puntosMaximos'].valueChanges.subscribe(data => this.examen.puntosMaximos = data)
     this.form.controls['numeroDePreguntas'].valueChanges.subscribe(data => this.examen.numeroDePreguntas = data)      
+    this.form.controls['intentos'].valueChanges.subscribe(data => this.examen.intentos = data)      
     this.form.controls['activo'].valueChanges.subscribe(data => this.examen.activo = data)    
     this.form.controls['categoria'].valueChanges.subscribe(data => this.examen.categoria.categoriaId = data)        
 
@@ -72,6 +74,7 @@ export class ModalCrearExamenComponent implements OnInit {
       this.form.controls['descripcion'].setValue(this.data.examen.descripcion);
       this.form.controls['puntosMaximos'].setValue(this.data.examen.puntosMaximos);
       this.form.controls['numeroDePreguntas'].setValue(this.data.examen.numeroDePreguntas);      
+      this.form.controls['intentos'].setValue(this.data.examen.intentos); 
       this.form.controls['activo'].setValue(this.data.examen.activo);
       this.form.controls['categoria'].setValue(this.data.examen.categoria.categoriaId);  
       
@@ -97,6 +100,10 @@ export class ModalCrearExamenComponent implements OnInit {
     return this.form.get('numeroDePreguntas');
   }
 
+  get intentos(){
+    return this.form.get('numeroDePreguntas');
+  }
+
   /*===== Validators =====*/
   getErrorMessageRequired() {        
     return 'El campo es requerido.';         
@@ -112,7 +119,8 @@ export class ModalCrearExamenComponent implements OnInit {
               'Exámen guardado con éxito en el sistema!!',
               'success'
             );            
-            this.dialogRef.close();  
+            location.reload();                
+            this.dialogRef.close();
           }
         );
       }   
@@ -125,10 +133,10 @@ export class ModalCrearExamenComponent implements OnInit {
               'success'
             ).then(
               (e) => {     
-                location.reload();                             
+                location.reload();                
+                this.dialogRef.close();                          
               }
-            );            
-            this.dialogRef.close();  
+            );                         
           }
         )       
       }         

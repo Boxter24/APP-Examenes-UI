@@ -1,11 +1,17 @@
 import { LocationStrategy } from '@angular/common';
 import { Pregunta } from './../../../../models/pregunta';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Examen } from 'src/app/models/examen';
 import { PreguntaService } from 'src/app/services/pregunta.service';
 import Swal from 'sweetalert2';
 import { faClock } from '@fortawesome/free-solid-svg-icons';
+import { ResultadoExamen } from 'src/app/models/resultadoExamen';
+import { ExamenService } from 'src/app/services/examen.service';
+import { SigninService } from 'src/app/services/signin.service';
+import { IntentoExamen } from 'src/app/models/intentoExamen';
+import { Usuario } from 'src/app/models/usuario';
+import { IntentoExamenService } from 'src/app/services/intento-examen.service';
 
 @Component({
   selector: 'app-comenzar-examen',
@@ -13,8 +19,7 @@ import { faClock } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./comenzar-examen.component.css']
 })
 export class ComenzarExamenComponent implements OnInit {
-
-  examnenId: any;
+  
   preguntas: Pregunta[] = [];
   respuestasCorrectas = 0;
   puntosConseguidos = 0;
@@ -22,19 +27,42 @@ export class ComenzarExamenComponent implements OnInit {
   faClock = faClock;
   mostrarTemporizadorMobile = true;
   enviado = false;
+  resultadoExamen: ResultadoExamen = new ResultadoExamen();  
+  private examenId: any;  
+  private user!: Usuario;  
+  private numeroDeIntentos!: number 
+  public intentoExamen!: IntentoExamen; 
 
   constructor(
-    private locationSt:LocationStrategy,
+    private router: Router,
     public examen: Examen,
+    private locationSt:LocationStrategy,    
     private route: ActivatedRoute,
-    private preguntaService: PreguntaService
+    private examenService: ExamenService,
+    private preguntaService: PreguntaService,
+    private signinService: SigninService,
+    private intentoExamenService: IntentoExamenService,
   ) { }
 
   ngOnInit(): void {
     this.prevenirElBotonDeRetroceso();
 
-    this.examnenId = this.route.snapshot.paramMap.get('examenId')!;
-    this.preguntaService.listarPreguntasDelExamen(this.examnenId).subscribe(
+    this.examenId = this.route.snapshot.paramMap.get('examenId')!;    
+
+    this.examenService.obtenerExamen(this.examenId).subscribe(
+      (data: any) => {
+        this.examen = data
+      },(error: any) => {
+        Swal.fire('Ooops', 'Hubo un error al cargar la información', 'error')
+      }
+    )
+
+    this.user = this.signinService.getUserId();
+    this.user.authorities = [];
+    this.intentoExamen = new IntentoExamen();
+    this.conteoIntentosExamen();    
+
+    this.preguntaService.listarPreguntasDelExamen(this.examenId).subscribe(
       (data: any) => {
         this.preguntas = data;
         
@@ -51,7 +79,7 @@ export class ComenzarExamenComponent implements OnInit {
     history.pushState(null,null!,location.href);
     this.locationSt.onPopState(() => {
       history.pushState(null,null!,location.href);
-    })
+    })    
   }
 
   evaluarExamen(): any {
@@ -65,6 +93,23 @@ export class ComenzarExamenComponent implements OnInit {
         this.puntosConseguidos += puntos;
       }
     })
+
+    this.puntosConseguidos = Math.round(this.puntosConseguidos);
+
+    this.resultadoExamen.examen.examenId = this.examenId;
+    this.resultadoExamen.usuario = this.signinService.getUser();
+    this.resultadoExamen.usuario.authorities = [];
+    this.resultadoExamen.resultado = this.puntosConseguidos;     
+
+    this.examenService.evaluarExamen(this.resultadoExamen).subscribe(
+      (data: any) => {
+        console.log(data);
+        
+      },(error: any) => {
+        Swal.fire('Ooops', 'Hubo un error al cargar la información', 'error')
+      }
+    )
+
 
     this.enviado = true;
   }
@@ -92,6 +137,31 @@ export class ComenzarExamenComponent implements OnInit {
 
   imprimirPagina(){
     window.print();
+  }
+
+  conteoIntentosExamen(): void {        
+    this.intentoExamenService.conteoIntentosExamen(this.examenId,this.user.id).subscribe(
+      (data: any) => {
+        this.numeroDeIntentos = data;
+
+        if(this.examen.intentos == this.numeroDeIntentos){
+          this.router.navigate(['/user/examen/instrucciones/'+this.examenId])
+        }
+
+        this.intentoExamen.usuario.id = this.user.id;
+        this.intentoExamen.examen.examenId = this.examenId;
+        this.intentoExamenService.guardarIntentoExamen(this.intentoExamen).subscribe(
+          (data: any) => {
+            console.log(data);
+            
+          },(error: any) => {
+
+          }
+        )
+      },(error: any) => {
+        Swal.fire('Ooops', 'Hubo un error al cargar la información', 'error')
+      }
+    )
   }
 
 }
