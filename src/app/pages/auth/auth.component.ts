@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import  {FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faUser, faEnvelope, faLock, faPhone, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -16,11 +17,16 @@ export class AuthComponent implements OnInit {
   faLock = faLock;
   faPhone = faPhone;
   faPencilAlt = faPencilAlt;
-  formMode: boolean = true;  
+  formMode: boolean = true;    
 
-  constructor() { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
+  ngOnInit(): void {    
+
+    if(this.router.url == '/login'){
+      this.formMode = false;
+    }
+    
   }  
 
   email = new FormControl('', [Validators.required, Validators.email]);

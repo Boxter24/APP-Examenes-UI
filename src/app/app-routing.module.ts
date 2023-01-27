@@ -30,10 +30,15 @@ const routes: Routes = [
         pathMatch : 'full'
     },
     {
-        path : 'login-register',
+        path : 'login',
         component : AuthComponent,
         pathMatch : 'full'
-    },        
+    },    
+    {
+        path : 'register',
+        component : AuthComponent,
+        pathMatch : 'full'
+    },          
     {
         path: 'admin',
         component: DashboardComponent,        

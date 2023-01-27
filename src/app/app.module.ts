@@ -46,6 +46,7 @@ import { InstruccionesExamenComponent } from './components/user/examen/instrucci
 import { ComenzarExamenComponent } from './components/user/examen/comenzar-examen/comenzar-examen.component';
 import { CrearUsuarioComponent } from './components/admin/usuario/crear-usuario/crear-usuario.component';
 import { ModalCrearUsuarioComponent } from './components/admin/usuario/modal-crear-usuario/modal-crear-usuario.component';
+import { NavbarWelcomeComponent } from './components/navbar-welcome/navbar-welcome.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { ModalCrearUsuarioComponent } from './components/admin/usuario/modal-cre
     InstruccionesExamenComponent,
     ComenzarExamenComponent,
     CrearUsuarioComponent,
-    ModalCrearUsuarioComponent,    
+    ModalCrearUsuarioComponent,
+    NavbarWelcomeComponent,    
   ],
   imports: [
     BrowserModule,
